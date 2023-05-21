@@ -1,0 +1,290 @@
+Activity Basics
+The Activities acts as the different pages of our application
+
+Layout (Where we do the design)
+ > activity_main.xml
+The structure of our application 
+
+* If we want to do the functionality we are going to do it in java file the .java
+
+Summary
+.xml for the structure or the design
+.java for code for the application/activities or functionalities
+
+09. Layout Editor Intro
+- If we modify our activity or our page our xml get updated
+
+Palette - takes components (or views) eg. button
+
+Components Tree - describes the structure
+Design - consider it as a design
+Blueprint as the structure
+
+10. Views and Layouts
+Layouts acts as a box to put views inside
+Views are the different components that we can use inside our application eg. text, buttons etc
+
+11. Intro to attributes(properties)
+- all are defined in the xml
+
+12. ID attribute
+//To get a reference to that object or view in the MainActivity.java
+R.id.hello;
+
+13. Static vs Dynamic
+Dynamic - responsive to all screen sizes
+
+XML - Static (hardcoded)
+
+Dynamic - We can change parts of the view inside the code dynamically
+How? 
+R.id.hello (grab an element and update it) or findViewById()
+- eg. people texts in a textbox and things get updated 
+or Shopping cart list or a to do list
+
+texted_value > stored_variable > display_activity
+
+14. Creating a Button
+
+To fix a button - we use a constraints layout - allow us to define the position of the 
+button based on the layout in which it is in
+
+and anchors it (fixes it) and responsive to all screen sizes
+
+15. Intro to Methods and onClick Handler
+- Events handling and Methods
+- Method 
+void - just does something but do not return anything eg, toggle something to change color
+-Events -(event handler - when we want the button to do something eg. onClick toggle)
+
+16. onClick View Parameter
+onClick toggle
+
+public void toggle(View v){ //(type nameOfTheView)
+	//code
+  int x = v.getId();
+  v.setEnabled(false);
+}
+
+View is a class
+v is an Object (an instance of the class View)
+
+17. onClick Event Handler
+
+Common Attributes > onClick > write code in the activity_main
+
+18. How to Disable Buttons
+> Disabling two buttons with one disable method taking onClick attribute disable
+
+19. Console Logging with Log.d and Logcat
+//Log if things were failure or successfully
+
+Log.d();
+//And Import: import android.util.Log;
+Log.d(tag:"success", msg:"Button Disabled");
+
+20. Changing Button Text when clicked
+
+(After doing Event handler with button Click)
+
+21. Intro to R Class and findViewById Method 
+Why id are important: used to access different elements and to get an object that refences that view on the activity page/screen
+
+public void mName(View view){
+  Button = findViewById(R.id.btn); //returns the view with this btn name
+//or when a button is pressed it returns a text (accessing other views)
+  TextView t = findViewById(R.id.txt);
+          t.setText("value");
+
+}
+
+22. Grabbing a Button with FindViewById and R.id
+Advantages of this is that it can be expanded to work with other views apart from the button only
+
+23. Casting a View in an Expression (Not a statement fix)
+
+24. Getting user Input through EditText
+
+25. Update TextView with Dynamic Output
+- Take input and use it as output
+PlainText > EditText
+TextView > TextView
+
+26. Alert in Android
+Toast.makeText(this, "Alert Android", Toast.LENGTH_LONG).show();
+
+*this keyword - refers to use whatever instance you are in current eg. class 
+
+27. Overview of the basics
+- ConstraintLayout - if you don't anchor a view it jumps out to top left
+
+28. Hands on Review
+
+29. Intro to Activities
+- A screen on your app
+MainActivity - Home page
+*Intents - initiates new activities and passes data
+
+30. How to Launch a New Activity
+
+public void launchSettings(View v){
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
+    }
+
+where: launchSettings - onClick event Listener
+
+31. Constraint Layout Basics
+
+32. Should use @string Resource Fix
+
+33. How to Change Main Activity
+Main Activity - the one which opens first when you open the home screen of your phone
+
+Android Manifest file - describes alot about our application and the activity that are in
+our application
+
+The Android manifest file (AndroidManifest.xml) is an XML file that provides essential 
+information about an Android app to the Android operating system. It contains information
+such as the app's package name, the activities and services the app contains, 
+any hardware or software requirements, the minimum required Android version, the app's 
+permissions, and more. The Android manifest file is a required component of an Android 
+app, and is included in the root directory of an app's project structure.
+
+Consider:
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.newactivity">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NewActivity"
+        tools:targetApi="31">
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" >
+	</activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+Note: This Piece of code specifies which page/activity opens first..
+
+<intent-filter>
+   <action android:name="android.intent.action.MAIN" />
+
+   <category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
+
+* Place it in the activity which you want it to open first
+
+34. Changing Activity Title in Code and XML
+
+First Way: In the AndroidManifest XML file add the attribute => ( android:label="theName" )
+But this way will also change the Name of the App (It will inherit the title name/label of the MainActivity)
+
+Best Way is to Change in the Java Code (MainActivity.java)
+in the onCreate Method add the following line of code
+setTitle("Home"); 
+Eg.
+   protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        setTitle("Home");
+    }
+
+So the second option is to not deal with changing in the XML but in the Java Code
+
+35. Creating a Back Arrow
+- Doing Backward navigation from an activity
+Go AndroidManifestFile > and add an attribute android:parentActivityName=".MainActivity" 
+to the activity where you want to put the back arro
+
+36. Passing data to another activity with putExtra
+
+37. How to delete and Activity Completely
+- How to remove an activity in the android studio and all the references
+> Right Click the activity
+> Then Go to find usages
+> Delete in the MainActivity Code which references to that activity (it's event handler)
+> Delete the whole XML file tool (right click on it then delete)
+> Delete it in the manifest file too (it's XML tag)
+> Then Delete the whole actual java file of that activity
+> You can also go to the values directory then strings.xml and delete any references (optionally)
+
+38. Generate Bottom Tabs with Fragments
+
+*Fragments
+In Android, a Fragment represents a portion of the user interface and/or behaviour within
+an Activity. Fragments are modular UI components that can be combined with other fragments
+ in a single activity to build a multi-pane UI. They allow you to build dynamic and 
+flexible UI designs that can adapt to different screen sizes and orientations. 
+A fragment can contain its own layout and logic, and communicate with the hosting activity
+ through callbacks. Fragments were introduced in Android 3.0 (Honeycomb) and are widely 
+used for creating responsive and dynamic user interfaces in modern Android applications.
+
+39. Exploring EditText Types
+> Text > Multiline Text > and other
+
+40. Making Dynamic Activity to compose a message
+- To Create a new Activity
+> Go to MainActivity.java and right click
+> New > Activity > Choose an activity (Empty Activity)
+> Rename the activity
+- This will generate the java file and xml file too
+
+- Inside the MainActivity Class
+public void composeMessage(View v){
+        //To Launch a new Activity
+        Intent i = new Intent(this, NewActivity.class);
+        startActivity(i);
+    }
+
+- In the XML file
+<Button
+    android:id="@+id/button"
+    android:onClick="composeMessage"
+    android:text="Reply Btn" />
+
+41. Checking Intent for null from putExtra
+
+
+Assignments:
+1. Login Page (Username, Password, Send_Button) - DONE
+
+2. Compose Email Page (SendEmail_Label, To, Subject, Message(Multiline), Send_Button) - DONE
+
+3. Sending btw activities (Name, Registration Number) 
+/* Create EditText to input data and button to transfer the data to the second activity
+and display them in a textView */
+- Step 1: Create Second Activity
+ > java > com...(right Click) > new > activity > empty activity > Finish
+- Step 2: Create button and EditText
+- Step 3: Create TextView in Second Activity to display data
+
+4. Simple Calculator (Operations of Two numbers and giving results)
+
+
+
+
+
+
+
+
