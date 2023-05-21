@@ -15,5 +15,3 @@ Steps (Using GUI)
 > Use Token > Generate > Generate and Copy from Github > paste it in the Android studio
 > Click on Login
 > Then the Code is pushed to the master branch in the github repository
-
-Git Token - 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 
